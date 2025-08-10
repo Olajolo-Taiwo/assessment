@@ -83,56 +83,496 @@ display: none;
 
 <script>
 const questions = [
-  {q: "Your teammate misunderstood your email instructions. What's the best way to fix it?", options: ["Clarify in a follow-up call or message", "Blame them for not reading", "Ignore it", "Resend the same email"], answer: 0},
-  {q: "A meeting is going off-topic due to side discussions. What's your role?", options: ["Stay silent", "Politely steer conversation back to the agenda", "Leave the meeting", "Join the side discussion"], answer: 1},
-  {q: "Your team leader is absent and a decision must be made quickly. What do you do?", options: ["Wait until they return", "Facilitate a quick group decision", "Make the decision alone without telling anyone", "Escalate to a higher manager"], answer: 1},
-  {q: "You spot a potential risk in the project timeline. What's the right move?", options: ["Raise it early with the team to plan mitigation", "Wait until it becomes a problem", "Ignore it", "Document it privately"], answer: 0},
-  {q: "A colleague interrupts you repeatedly in meetings. How do you handle it?", options: ["Ask politely to finish your point", "Interrupt them back", "Stay quiet", "Complain after the meeting"], answer: 0},
-  {q: "Two team members are blaming each other for a mistake. How can you help?", options: ["Redirect focus to the problem, not the person", "Pick the side you believe", "Report both to HR", "Ignore it"], answer: 0},
-  {q: "A task requires expertise you don't have. What's the collaborative move?", options: ["Ask for help from someone skilled", "Guess and do it yourself", "Decline the task", "Delay until you learn it"], answer: 0},
-  {q: "You are asked to work with someone with a completely different style. What's best?", options: ["Find common working ground and adapt", "Insist they adapt to you", "Work separately", "Avoid them"], answer: 0},
-  {q: "Your team finished ahead of schedule. What's the most collaborative step?", options: ["Help other teams or improve the project", "Take the rest of the week off", "Boast about your efficiency", "Ignore extra opportunities"], answer: 0},
-  {q: "A team decision goes against your idea. What's your reaction?", options: ["Support the decision and help execute", "Refuse to participate", "Keep arguing", "Do your own version"], answer: 0},
-  {q: "A client gives direct feedback to you but it impacts the whole team. What now?", options: ["Share it constructively with the team", "Ignore it", "Only fix your part", "Tell only your manager"], answer: 0},
-  {q: "You notice another team is struggling with a shared project dependency. What's your move?", options: ["Offer help or adjust your schedule to unblock them", "Wait until they ask", "Ignore it", "Tell their manager"], answer: 0},
-  {q: "You're working in a global team with time zone challenges. How do you adapt?", options: ["Be flexible with meeting times and communicate asynchronously", "Refuse to attend early/late meetings", "Only work your hours", "Let them adjust"], answer: 0},
-  {q: "Two members propose equally good ideas. How do you choose?", options: ["Use objective criteria or test both", "Pick your friend's idea", "Flip a coin", "Let the louder person win"], answer: 0},
-  {q: "You join a new team mid-project. What's the first thing you should do?", options: ["Learn about the project and roles", "Suggest changes immediately", "Focus only on your tasks", "Ask who the leader is"], answer: 0},
-  {q: "A teammate's cultural background affects their communication style. What's best?", options: ["Learn about and adapt to their style", "Ignore it", "Ask them to change", "Avoid working with them"], answer: 0},
-  {q: "The team is brainstorming but only a few speak. What's your role?", options: ["Encourage quieter members to share", "Let talkative members dominate", "Stay silent", "End the meeting"], answer: 0},
-  {q: "You promised to deliver part of the work but realize you'll be late. What's right?", options: ["Inform the team early and adjust plans", "Wait until deadline", "Blame external factors later", "Ignore it"], answer: 0},
-  {q: "Your teammate takes credit for your idea in a meeting. How do you react?", options: ["Politely acknowledge your contribution and give credit to them too", "Call them out harshly", "Stay silent", "Report to manager"], answer: 0},
-  {q: "The group has decided but one person is unhappy. What's your move?", options: ["Acknowledge their concern and see if it can be addressed", "Ignore them", "Tell them to accept it", "Restart the decision process"], answer: 0},
-  {q: "A deliverable requires multiple approvals. How do you coordinate?", options: ["Track and follow up with each approver proactively", "Wait for them to respond", "Send one email and hope", "Skip approvals"], answer: 0},
-  {q: "Your team needs to adopt a new tool. What's your contribution?", options: ["Learn it and help train others", "Ignore it", "Complain about change", "Let others figure it out"], answer: 0},
-  {q: "You and another member have overlapping tasks. What's best?", options: ["Coordinate to avoid duplication", "Work separately and compare later", "Compete to finish first", "Ignore each other"], answer: 0},
-  {q: "Someone new joins your project. How do you onboard them?", options: ["Share key info and help them integrate", "Let them figure it out", "Send them documents only", "Avoid extra work"], answer: 0},
-  {q: "The team lead asks for honest feedback. What's your role?", options: ["Give constructive feedback respectfully", "Say nothing", "Only share positives", "Complain harshly"], answer: 0},
-  {q: "You're leading a meeting and notice confusion. What's best?", options: ["Pause to clarify and check understanding", "Continue anyway", "Ignore it", "Let confusion spread"], answer: 0},
-  {q: "A deadline requires weekend work. What's collaborative?", options: ["Discuss workload and availability openly", "Refuse instantly", "Assume others will do it", "Ignore the request"], answer: 0},
-  {q: "Two team members speak different native languages. How can you help?", options: ["Use clear language and translation tools", "Let them sort it", "Only talk to one", "Ignore the barrier"], answer: 0},
-  {q: "You're in a group project but one person does all the talking to the client. What should you do?", options: ["Suggest rotating client communication roles", "Let them continue", "Take over without asking", "Avoid client contact"], answer: 0},
-  {q: "A teammate submits work that has errors. What's your first action?", options: ["Publicly point it out in chat", "Privately message them to discuss fixes", "Ignore it to keep the peace", "Fix it yourself quietly"], answer: 1},
-  {q: "During a meeting, you notice the plan has a major flaw. What's best?", options: ["Wait until after the meeting to share privately", "Speak up immediately with possible solutions", "Write an email later", "Let it go"], answer: 1},
-  {q: "Two colleagues are arguing during a project. How do you respond?", options: ["Take sides with the person you agree with", "Help mediate by focusing on shared goals", "Ignore them", "Escalate immediately to management"], answer: 1},
-  {q: "A team member is struggling with their task and is falling behind. What's your approach?", options: ["Offer to help or redistribute workload", "Complain to others", "Do nothing", "Replace them"], answer: 0},
-  {q: "Your project deadline is tight, and you spot an error that will take time to fix. What's best?", options: ["Ignore the error to meet the deadline", "Raise it with the team and decide together", "Fix it quietly", "Blame whoever made it"], answer: 1},
-  {q: "You have a disagreement with a colleague's approach. What's your move?", options: ["Tell them directly they're wrong", "Discuss your concerns privately and suggest alternatives", "Go over their head to the boss", "Ignore and proceed"], answer: 1},
-  {q: "A new team member is quiet in meetings. How do you include them?", options: ["Ask for their opinion directly in a supportive way", "Ignore them", "Talk over them", "Tell them to speak more"], answer: 0},
-  {q: "You are assigned a task you don't fully understand. What's best?", options: ["Pretend you understand", "Ask clarifying questions", "Do it your own way", "Refuse the task"], answer: 1},
-  {q: "Two departments have conflicting priorities. How do you help?", options: ["Find a compromise that meets core needs of both", "Pick one side", "Let them sort it out", "Avoid the conflict"], answer: 0},
-  {q: "Your colleague shares credit for your work in a presentation. What's the right response?", options: ["Thank them and acknowledge their contributions too", "Stay silent", "Correct them publicly", "Complain later"], answer: 0},
-  // 40 harder/more realistic questions
-  {q: "A remote teammate has missed three consecutive deadlines. What’s your first step?", options: ["Escalate to management immediately", "Reach out to understand challenges and offer support", "Publicly call them out in group chat", "Take over their tasks"], answer: 1},
-  {q: "In a cross-functional meeting, two teams use conflicting technical terms. How do you proceed?", options: ["Interrupt to demand clarification", "Summarize the terms in plain language for everyone", "Let them continue", "Switch topics"], answer: 1},
-  {q: "You notice a colleague is excluded from informal team chats. What should you do?", options: ["Invite them personally and encourage inclusion", "Say nothing", "Tell them to join if they want", "Complain privately"], answer: 0},
-  {q: "The client sends feedback that contradicts your team’s approach. What’s your role?", options: ["Push back without discussion", "Organize a quick sync to align on response", "Ignore client feedback", "Follow your approach without question"], answer: 1},
-  {q: "You realize your mistake caused a delay. What's the best action?", options: ["Hide it", "Own the mistake and suggest a fix", "Blame unclear instructions", "Wait for someone to notice"], answer: 1},
-  {q: "Your team is split evenly between two strong opinions. How do you help decide?", options: ["Push for the option you like", "Suggest gathering more data or running a test", "Stay silent", "Ask the manager to choose"], answer: 1},
-  {q: "A teammate's joke makes someone uncomfortable. How do you handle it?", options: ["Laugh along", "Address it respectfully and remind about inclusivity", "Ignore it", "Report immediately without context"], answer: 1},
-  {q: "Your project requires input from a busy senior member. What's your approach?", options: ["Keep waiting", "Schedule a short focused meeting with clear agenda", "Spam them with messages", "Skip their input"], answer: 1},
-  {q: "A new policy is unpopular with your team. What's your role?", options: ["Encourage open discussion and share constructive feedback to management", "Lead a protest", "Ignore the concerns", "Refuse to follow it"], answer: 0},
-  {q: "You and a teammate get conflicting instructions from two managers. What now?", options: ["Pick one manager's instruction", "Clarify priorities with both managers together", "Do both sets of work", "Ignore one set"], answer: 1}
+  {
+    q: "Your team is working on a critical deliverable due in two days. One member has submitted their section, but you notice that their part is incomplete and missing key data. They are currently out of the office for the rest of the day. What is the most collaborative approach?",
+    options: [
+      "Send them a message pointing out the missing data and wait until they return to address it.",
+      "Quietly complete their section yourself so the team can progress without delay.",
+      "Inform the team about the missing data and collectively decide whether to reassign or wait.",
+      "Escalate immediately to your manager to handle the issue."
+    ],
+    answer: 2
+  },
+  {
+    q: "During a brainstorming meeting, one teammate keeps interrupting others and dominating the conversation. Several quieter team members have not spoken at all. What should you do to foster collaboration?",
+    options: [
+      "Privately message the dominant teammate to stop talking so much.",
+      "Politely interrupt and ask quieter members for their ideas.",
+      "Let the dominant teammate finish and move on without input from others.",
+      "End the meeting early and request written ideas later."
+    ],
+    answer: 1
+  },
+  {
+    q: "Two colleagues are having a heated disagreement over a technical approach. The argument is taking place in the team chat where everyone can see it, and it’s delaying decision-making. How should you respond?",
+    options: [
+      "Ask both parties to take the discussion offline and suggest a moderated session to find common ground.",
+      "Choose the side you agree with and back them up publicly.",
+      "Ignore the argument and hope it resolves itself.",
+      "Inform your manager and remove yourself from the discussion."
+    ],
+    answer: 0
+  },
+  {
+    q: "You are collaborating on a shared document, and a teammate accidentally deletes an important section you wrote. They have not noticed the error. What is the most constructive way forward?",
+    options: [
+      "Quietly restore the section from version history without telling them.",
+      "Point it out politely and suggest restoring the section together to ensure accuracy.",
+      "Publicly call them out to the team to make sure they don’t do it again.",
+      "Complain to your manager about their carelessness."
+    ],
+    answer: 1
+  },
+  {
+    q: "In a cross-functional project, marketing insists on a feature that engineering believes will cause significant delays. The deadline is fixed. How can you help resolve the conflict?",
+    options: [
+      "Encourage both sides to outline must-haves versus nice-to-haves and negotiate a compromise.",
+      "Take marketing’s side because they are closer to the customer.",
+      "Support engineering’s decision since they understand the technical risks.",
+      "Suggest postponing the entire project until both sides agree."
+    ],
+    answer: 0
+  },
+  {
+    q: "Your colleague misinterprets a requirement and sends a draft to the client without peer review. The client gives negative feedback, causing tension in the team. How do you address it?",
+    options: [
+      "Privately speak with the colleague to understand what happened and discuss a process to avoid similar mistakes.",
+      "Point out in the next team meeting that they skipped the review process.",
+      "Ignore the mistake to avoid hurting their feelings.",
+      "Forward the client’s feedback directly to your manager without comment."
+    ],
+    answer: 0
+  },
+  {
+    q: "While preparing for a major presentation, you notice that two slides prepared by another team are outdated. The meeting is in one hour. What is your best course of action?",
+    options: [
+      "Replace the outdated slides yourself and inform the team after the presentation.",
+      "Immediately contact the other team to verify and update the slides if possible.",
+      "Proceed with the outdated slides and clarify verbally during the presentation.",
+      "Remove the slides without telling anyone."
+    ],
+    answer: 1
+  },
+  {
+    q: "You’ve been assigned as the point of contact between your team and an external vendor. The vendor repeatedly sends incomplete information, slowing progress. How should you collaborate effectively?",
+    options: [
+      "Schedule a call with the vendor to clarify expectations and create a shared checklist.",
+      "Forward their incomplete information to your manager for them to handle.",
+      "Ignore the incomplete parts and proceed with what you have.",
+      "Ask another teammate to take over communications."
+    ],
+    answer: 0
+  },
+  {
+    q: "A junior teammate makes a suggestion in a meeting that is not feasible, but you can tell they put a lot of thought into it. How do you respond?",
+    options: [
+      "Dismiss it quickly to keep the meeting moving.",
+      "Acknowledge their effort, explain the constraints, and suggest exploring related ideas together.",
+      "Pretend the idea is good to encourage them, even though it won’t be used.",
+      "Ask the manager to handle it."
+    ],
+    answer: 1
+  },
+  {
+    q: "Halfway through a project, the client changes a major requirement. Some team members are upset and resistant to the change. How do you help the team adapt?",
+    options: [
+      "Facilitate a discussion to outline the impact, identify solutions, and redistribute work as needed.",
+      "Tell the team to stop complaining and just do the work.",
+      "Ignore the resistance and focus only on your own tasks.",
+      "Ask the client to revert their decision."
+    ],
+    answer: 0
+  },
+  {
+    q: "In a multi-timezone project, one team member consistently misses meetings because of scheduling conflicts. This is starting to cause delays. What is the most collaborative solution?",
+    options: [
+      "Work with the team to find alternative communication methods and adjust meeting times where possible.",
+      "Remove them from the project.",
+      "Proceed without them and hope they catch up.",
+      "Ask your manager to discipline them."
+    ],
+    answer: 0
+  },
+  {
+    q: "During a deadline crunch, you notice a teammate working late every night but not meeting their deliverables. You suspect they are stuck but not asking for help. What’s the best approach?",
+    options: [
+      "Privately check in with them to offer support and suggest resources or pairing.",
+      "Publicly ask them in the team chat why they are behind.",
+      "Leave them alone to figure it out themselves.",
+      "Report them to your manager for poor performance."
+    ],
+    answer: 0
+  },
+  {
+    q: "In a planning session, a critical point from another department is being overlooked. You understand the importance, but your own department head is pushing a conflicting priority. What do you do?",
+    options: [
+      "Raise the other department’s point and suggest finding a compromise that addresses both priorities.",
+      "Stay silent to avoid tension with your department head.",
+      "Support your department only.",
+      "Suggest postponing the discussion."
+    ],
+    answer: 0
+  },
+  {
+    q: "Your project team is made up of people with very different work styles. Some prefer detailed plans, while others thrive on flexibility. This is causing friction. How do you address it?",
+    options: [
+      "Facilitate a team session to agree on a hybrid approach that accommodates both styles.",
+      "Force everyone to adopt a single approach.",
+      "Let each person work however they want without coordination.",
+      "Ask the manager to decide the approach."
+    ],
+    answer: 0
+  },
+  {
+    q: "In a feedback session, a teammate criticizes your work harshly in front of the group. How should you respond to keep collaboration intact?",
+    options: [
+      "Defend yourself immediately and counter their criticism with their own mistakes.",
+      "Acknowledge their feedback, suggest discussing specifics privately, and stay constructive.",
+      "Ignore the feedback entirely.",
+      "Ask the manager to step in during the meeting."
+    ],
+    answer: 1
+  },
+  {
+    q: "A key task has dependencies across three different teams. Progress is stalled because no one is sure who is responsible for which part. How do you help move things forward?",
+    options: [
+      "Organize a quick coordination call to clarify responsibilities and agree on next steps.",
+      "Let the teams figure it out themselves.",
+      "Take over all parts of the work yourself.",
+      "Escalate immediately to upper management."
+    ],
+    answer: 0
+  },
+  {
+    q: "A teammate who is usually reliable delivers subpar work twice in a row. You suspect they are dealing with personal issues. How do you handle it?",
+    options: [
+      "Privately check in to express concern and see if they need support or adjustments.",
+      "Publicly ask them why their work quality has dropped.",
+      "Report them for underperformance.",
+      "Ignore it until it affects you directly."
+    ],
+    answer: 0
+  },
+  {
+    q: "While reviewing a proposal, you and another team member have different interpretations of the requirements. This disagreement is delaying sign-off. What’s your next step?",
+    options: [
+      "Schedule a brief meeting to align your interpretations and, if needed, consult the project owner for clarification.",
+      "Push your interpretation forward since you are confident it’s correct.",
+      "Abandon the discussion and let someone else decide.",
+      "Escalate to your manager immediately."
+    ],
+    answer: 0
+  },
+  {
+    q: "Your team has been asked to collaborate with a new department that has different processes and tools. Initial interactions have been slow and awkward. How do you improve collaboration?",
+    options: [
+      "Propose a joint session to understand each other’s workflows and agree on common ground.",
+      "Insist they adapt fully to your team’s tools.",
+      "Avoid working closely with them and focus on your own part.",
+      "Ask your manager to assign someone else."
+    ],
+    answer: 0
+  },
+  {
+    q: "During a sprint review, a stakeholder requests a change that seems minor but could affect multiple features. The team is split on whether to include it. What’s your role in the discussion?",
+    options: [
+      "Facilitate a conversation to weigh the pros, cons, and dependencies before making a decision.",
+      "Support the majority opinion without discussion.",
+      "Avoid contributing since you don’t want responsibility.",
+      "Push for immediate implementation."
+    ],
+    answer: 0
+  },
+  {
+    q: "You receive a message from a colleague in another country asking for urgent input, but it’s after your work hours. How do you handle this while maintaining collaboration?",
+    options: [
+      "Respond briefly acknowledging their request and commit to a detailed reply during your work hours.",
+      "Ignore the message until you are back at work.",
+      "Stay up late to fully address it immediately.",
+      "Forward it to someone else without explanation."
+    ],
+    answer: 0
+  },
+  {
+    q: "In a cross-department review, you notice your team’s mistake was missed by everyone else. The error could cause issues later. What’s the best action?",
+    options: [
+      "Bring up the mistake and propose a fix before the review ends.",
+      "Stay silent to avoid embarrassment for your team.",
+      "Fix it quietly later without mentioning it.",
+      "Let the mistake go since it wasn’t caught."
+    ],
+    answer: 0
+  },
+  {
+    q: "Your team is stuck deciding between two good options. The debate is going in circles. What’s your next move?",
+    options: [
+      "Suggest defining objective criteria to evaluate both options and make a decision.",
+      "Push for the option you personally prefer.",
+      "Let the debate continue until someone gives up.",
+      "Ask the manager to make the decision."
+    ],
+    answer: 0
+  },
+  {
+    q: "You’re in a shared workspace and overhear two colleagues discussing confidential project information with people outside the project. How should you handle it?",
+    options: [
+      "Politely remind them of confidentiality guidelines and suggest a private place to continue.",
+      "Report them immediately without speaking to them.",
+      "Ignore it since it’s not your responsibility.",
+      "Join the conversation to learn more."
+    ],
+    answer: 0
+  },
+  {
+    q: "A new member has joined your team midway through a project. They are unfamiliar with the team’s tools and processes, and their progress is slow. Some members are getting frustrated. How do you respond?",
+    options: [
+      "Pair them with an experienced teammate for a few sessions to accelerate their onboarding.",
+      "Leave them to figure it out on their own since time is short.",
+      "Reassign their work to others to avoid delays.",
+      "Ask the manager to replace them with someone faster."
+    ],
+    answer: 0
+  },
+  {
+    q: "During a team call, someone’s internet connection keeps cutting out. They’re missing key parts of the discussion. What’s the most collaborative way to address this?",
+    options: [
+      "Pause briefly to summarize key points for them and agree on a backup communication method.",
+      "Ignore the issue and continue the call.",
+      "Suggest they drop off and catch up on their own.",
+      "Complain to the manager about their connection."
+    ],
+    answer: 0
+  },
+  {
+    q: "You and another team member are assigned to co-lead a client presentation. The day before, they tell you they’re unprepared due to personal emergencies. What do you do?",
+    options: [
+      "Offer to cover more of the presentation while helping them quickly prepare their part.",
+      "Tell them it’s their problem and they need to figure it out.",
+      "Cancel the presentation.",
+      "Ask the manager to replace them entirely."
+    ],
+    answer: 0
+  },
+  {
+    q: "Two teammates have overlapping responsibilities, and both are producing similar work without realizing it. How do you prevent duplication and frustration?",
+    options: [
+      "Facilitate a quick sync to clarify ownership and align on who handles which tasks.",
+      "Let them continue since both outputs might be useful.",
+      "Choose one person’s work to keep and discard the other’s without discussion.",
+      "Ask the manager to assign tasks more clearly next time."
+    ],
+    answer: 0
+  },
+  {
+    q: "A project deadline is at risk because one department has not delivered their part. They claim they were never informed of the due date. What’s your best step?",
+    options: [
+      "Share the project timeline and set a new, mutually agreed deadline, ensuring better communication moving forward.",
+      "Blame them publicly for the delay.",
+      "Ignore their delay and focus on your own deliverables.",
+      "Escalate to leadership immediately."
+    ],
+    answer: 0
+  },
+  {
+    q: "Your teammate strongly disagrees with the method you’ve proposed, but you believe it’s the most efficient approach. How do you handle it?",
+    options: [
+      "Listen to their reasoning, discuss pros and cons, and consider a combined solution.",
+      "Insist on your method because you’re confident it’s best.",
+      "Ignore their input and proceed with your plan.",
+      "Ask the manager to decide."
+    ],
+    answer: 0
+  },
+  {
+    q: "The team is tasked with creating documentation, but most members find it tedious. As a result, progress is slow. What’s your collaborative move?",
+    options: [
+      "Suggest dividing the work into smaller, rotating chunks so no one is overloaded.",
+      "Take on all the documentation yourself.",
+      "Complain that the team isn’t doing their part.",
+      "Skip documentation to save time."
+    ],
+    answer: 0
+  },
+  {
+    q: "Your colleague often sends long, unfocused emails to the group, causing confusion. How do you address it constructively?",
+    options: [
+      "Privately suggest ways to make emails clearer and more concise.",
+      "Ignore the emails and hope they improve.",
+      "Reply-all with corrections to their email.",
+      "Report them to the manager for poor communication."
+    ],
+    answer: 0
+  },
+  {
+    q: "You’re part of a virtual team. In group chats, some members respond quickly while others take hours or days. This slows decisions. How can you improve responsiveness?",
+    options: [
+      "Propose agreed response-time guidelines and offer alternative channels for urgent matters.",
+      "Demand everyone respond immediately at all times.",
+      "Remove slow responders from key decisions.",
+      "Ignore the delays and hope they improve."
+    ],
+    answer: 0
+  },
+  {
+    q: "Your manager assigns you a role in a project you have little experience in, but another teammate is an expert. How do you ensure effective collaboration?",
+    options: [
+      "Work closely with the expert, asking for guidance and sharing progress updates.",
+      "Decline the role because you’re inexperienced.",
+      "Do the work alone and avoid bothering the expert.",
+      "Ask the manager to reassign it to the expert."
+    ],
+    answer: 0
+  },
+  {
+    q: "In a joint project with another company, their representative keeps missing agreed deadlines, affecting your timeline. What’s the best next step?",
+    options: [
+      "Have an open conversation with them to understand obstacles and agree on a realistic plan.",
+      "Complain to your manager without contacting them.",
+      "Replace them with someone else immediately.",
+      "Continue as is and adjust expectations silently."
+    ],
+    answer: 0
+  },
+  {
+    q: "Your team is under pressure, and tensions are high. Small disagreements are turning into bigger conflicts. How do you help maintain collaboration?",
+    options: [
+      "Encourage open, respectful communication and offer to mediate small conflicts before they escalate.",
+      "Avoid the team until tensions fade.",
+      "Pick a side in each conflict to move things forward.",
+      "Ask the manager to intervene in all disagreements."
+    ],
+    answer: 0
+  },
+  {
+    q: "You find an error in your colleague’s work just before it’s sent to a client. Time is short. What’s the collaborative approach?",
+    options: [
+      "Quickly inform them of the error and suggest fixing it together before sending.",
+      "Fix it without telling them.",
+      "Send it as is to meet the deadline.",
+      "Report the error to the manager and do nothing else."
+    ],
+    answer: 0
+  },
+  {
+    q: "Your department is asked to contribute to a company-wide initiative. Several teammates see it as extra work and aren’t cooperating. What do you do?",
+    options: [
+      "Highlight the benefits of participation and suggest ways to integrate it into current workflows.",
+      "Ignore the initiative.",
+      "Push the work to a small group of willing members.",
+      "Complain to leadership about the resistance."
+    ],
+    answer: 0
+  },
+  {
+    q: "Two members of your project team do not get along and avoid speaking to each other, slowing progress. What’s the best step?",
+    options: [
+      "Facilitate a neutral discussion to clarify roles and focus on shared goals.",
+      "Work around them and avoid involving both at once.",
+      "Ask the manager to replace one of them.",
+      "Ignore the situation entirely."
+    ],
+    answer: 0
+  },
+  {
+    q: "In a meeting with external partners, a teammate accidentally shares outdated data. You know it could cause misunderstandings later. What do you do?",
+    options: [
+      "Politely correct the data in the moment and offer to share updated figures after the meeting.",
+      "Ignore it to avoid embarrassing them.",
+      "Privately tell the partners later.",
+      "Report the error to your manager."
+    ],
+    answer: 0
+  },
+  {
+    q: "Your project requires input from a specialist in another team who is very busy. They haven’t responded to multiple requests. How do you proceed?",
+    options: [
+      "Reach out to them directly to schedule a short, focused meeting to get the needed input.",
+      "Keep sending the same request repeatedly.",
+      "Complain to their manager.",
+      "Proceed without their input."
+    ],
+    answer: 0
+  },
+  {
+    q: "While collaborating on a shared design file, you notice someone is overwriting others’ work without notice. How do you handle it?",
+    options: [
+      "Address it directly in a friendly way and propose a version control process.",
+      "Revert their changes silently.",
+      "Lock them out of the file.",
+      "Report them to management."
+    ],
+    answer: 0
+  },
+  {
+    q: "A teammate proposes a solution you believe will cause extra work for other departments. How do you respond?",
+    options: [
+      "Explain the potential downstream impact and suggest alternatives that reduce extra work.",
+      "Ignore the concern and let them proceed.",
+      "Tell other departments to prepare for the extra work.",
+      "Reject their proposal outright."
+    ],
+    answer: 0
+  },
+  {
+    q: "In a planning meeting, the team is focused on short-term goals, but you see risks to long-term success. What do you do?",
+    options: [
+      "Raise the long-term risks and facilitate a discussion on balancing short- and long-term priorities.",
+      "Stay silent to keep the meeting on track.",
+      "Document your concerns privately but don’t share.",
+      "Ask the manager to handle long-term planning."
+    ],
+    answer: 0
+  },
+  {
+    q: "Your group is preparing a joint report. Everyone is working in separate files, making it hard to track changes. How do you improve collaboration?",
+    options: [
+      "Suggest using a shared document or platform to centralize updates.",
+      "Let everyone continue separately and merge later.",
+      "Collect all files yourself and compile them manually.",
+      "Ask the manager to assign one person to write the report."
+    ],
+    answer: 0
+  },
+  {
+    q: "You receive feedback on your part of a project that you disagree with. The feedback comes from a colleague who has more experience. What’s the collaborative way to respond?",
+    options: [
+      "Thank them for the feedback, discuss your perspective, and seek a mutual understanding.",
+      "Dismiss the feedback because you think you’re right.",
+      "Ignore the feedback entirely.",
+      "Forward it to your manager to decide."
+    ],
+    answer: 0
+  },
+  {
+    q: "Your teammate is covering for someone on leave, and their workload is overwhelming them. How do you help?",
+    options: [
+      "Offer to take on some of their tasks or help prioritize the most urgent ones.",
+      "Let them manage their own workload.",
+      "Suggest they work longer hours.",
+      "Ask the manager to redistribute without offering help yourself."
+    ],
+    answer: 0
+  },
+  {
+    q: "In a joint call with a client, two members of your team give contradictory answers to a question. How do you handle it?",
+    options: [
+      "Step in to clarify the answer and suggest following up with a single, confirmed response.",
+      "Stay silent to avoid embarrassment.",
+      "Correct one person publicly.",
+      "End the call early."
+    ],
+    answer: 0
+  },
+  {
+    q: "Your project has hit a roadblock due to unclear decision-making authority. What’s the most collaborative move?",
+    options: [
+      "Organize a quick meeting to define roles, responsibilities, and decision-making authority.",
+      "Wait for someone else to take the lead.",
+      "Escalate the issue immediately.",
+      "Work without clear authority and hope it resolves."
+    ],
+    answer: 0
+  }
 ];
 
 
