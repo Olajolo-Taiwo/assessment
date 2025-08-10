@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Collaboration quiz</title>
+<style>
+  body { 
+  font-family: Arial, sans-serif; 
+  margin: 0; 
+  padding: 0; 
+  background: #f9f9f9; 
+}
+  .container { max-width: 900px; 
+  margin: auto; 
+  background: white; 
+  padding: 50px; border-radius: 10px; 
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  margin-top: 100px;}
+  h1 { 
+  text-align: center; 
+}
+  .question { 
+  margin-bottom: 20px; 
+}
+  .options label { 
+  display: block; 
+  margin-bottom: 8px; 
+}
+  button { 
+  padding: 10px 15px; 
+  border: none; 
+  border-radius: 5px; 
+  cursor: pointer; 
+}
+  #submitBtn { 
+  background: #4CAF50; 
+  color: white; 
+  margin-top: 20px; 
+}
+  #startBtn { 
+  background: #2196F3; 
+  color: white; 
+  margin:auto; 
+  align-items: center; 
+  display:flex;
+}
+  #result { 
+  font-size: 1.2em; 
+  margin-top: 20px; 
+}
+  .correct { 
+color: green; 
+}
+  .wrong { 
+color: red; 
+}
+  .timer { 
+  text-align: right; 
+  font-weight: bold; 
+  margin-bottom: 20px; 
+}
+  #quizSection { 
+display: none; 
+}
+</style>
+</head>
+<body>
+
+<div class="container" id="startSection">
+  <h1>Collaboration Quiz</h1>
+  <p style="text-align: center;">This quiz has 50 questions. You have 20 minutes to complete it. Click below when you are ready the timer will start immediately.</p>
+  <button id="startBtn">Start Quiz</button>
+</div>
+
+<div class="container" id="quizSection">
+  <h1>Collaboration Skills Quiz</h1>
+  <div class="timer" id="timer">40:00</div>
+  <form id="quizForm"></form>
+  <button id="submitBtn">Submit Quiz</button>
+  <div id="result"></div>
+</div>
+
+<script>
+const questions = [
+  {q:"A teammate submits work with multiple errors. What's your first action?", options:["Publicly point it out","Privately discuss and help fix","Ignore it","Fix it yourself"], answer:1},
+  {q:"During a meeting, you notice a flaw in the plan. What's best?", options:["Speak up immediately with solutions","Wait until after","Send an email later","Let it go"], answer:0},
+  {q:"Two colleagues are arguing mid-project. How do you respond?", options:["Take sides","Mediate focusing on goals","Ignore","Escalate immediately"], answer:1},
+  {q:"A team member is falling behind. What’s your approach?", options:["Offer help/redistribute work","Complain","Do nothing","Replace them"], answer:0},
+  {q:"Deadline is tight, you see an error. What's best?", options:["Ignore to meet deadline","Raise with team","Fix quietly","Blame someone"], answer:1},
+  {q:"You disagree with a colleague’s approach. What's best?", options:["Tell them they're wrong","Discuss privately","Go to boss","Ignore"], answer:1},
+  {q:"A new member is quiet in meetings. How do you include them?", options:["Ask for their opinion kindly","Ignore","Talk over them","Tell them to speak more"], answer:0},
+  {q:"You get a task you don't understand. What's best?", options:["Pretend to understand","Ask clarifying questions","Do it your way","Refuse"], answer:1},
+  {q:"Two departments have conflicting priorities. You?", options:["Find compromise","Pick a side","Let them sort","Avoid"], answer:0},
+  {q:"Colleague shares credit for your work. You?", options:["Thank & acknowledge them","Stay silent","Correct publicly","Complain later"], answer:0},
+
+  // Harder situational
+  {q:"A remote teammate misses several deadlines. What's your first step?", options:["Check in privately to understand challenges","Report immediately","Ignore","Send warning email"], answer:0},
+  {q:"Your project manager makes a decision you disagree with. What's best?", options:["Respectfully share concerns privately","Challenge in front of team","Ignore","Go over their head"], answer:0},
+  {q:"A teammate dominates discussions. You?", options:["Politely invite others to speak","Let them talk","Interrupt","Speak less yourself"], answer:0},
+  {q:"Team's goal changes suddenly. How to respond?", options:["Adapt plan collaboratively","Complain","Ignore change","Work individually"], answer:0},
+  {q:"Colleague constantly interrupts you. What's best?", options:["Address politely, ask to let you finish","Interrupt back","Stay quiet","Report immediately"], answer:0},
+  {q:"Your idea is ignored but repeated by another later. You?", options:["Acknowledge your prior mention professionally","Confront them","Stay silent","Criticize them"], answer:0},
+  {q:"Team is stressed before deadline. How help?", options:["Boost morale & assist","Push them harder","Avoid team","Do only your work"], answer:0},
+  {q:"Two teammates disagree on technical approach. You?", options:["Facilitate pros/cons discussion","Pick side quickly","Let them argue","Escalate"], answer:0},
+  {q:"A client criticizes your team publicly. You?", options:["Respond professionally & discuss offline","Defend aggressively","Ignore","Blame someone"], answer:0},
+  {q:"You notice a process inefficiency. You?", options:["Propose improvement in team forum","Ignore","Change quietly","Complain privately"], answer:0},
+
+  // More advanced
+  {q:"You're leading a meeting & discussion goes off-topic. You?", options:["Redirect politely to agenda","Let it go","End meeting","Scold participants"], answer:0},
+  {q:"Conflict arises over limited resources. You?", options:["Negotiate priorities openly","Pick senior's request","Avoid","Escalate immediately"], answer:0},
+  {q:"Teammate is defensive about feedback. You?", options:["Give examples & stay constructive","Criticize more","Avoid feedback","Get angry"], answer:0},
+  {q:"You have more work than you can handle. You?", options:["Communicate early & ask to reassign","Work silently","Miss deadlines","Decline new work rudely"], answer:0},
+  {q:"A misunderstanding causes tension. You?", options:["Clarify facts calmly","Ignore","Blame","Wait"], answer:0},
+  {q:"Team is distributed across time zones. You?", options:["Set overlapping meeting times","Ignore differences","Force one schedule","Avoid calls"], answer:0},
+  {q:"A member isn't pulling their weight. You?", options:["Discuss privately, offer support","Gossip","Replace","Ignore"], answer:0},
+  {q:"Your manager forgets to include you in important emails. You?", options:["Politely remind & request inclusion","Ignore","Complain","Forward emails to self"], answer:0},
+  {q:"Team decision goes against you. You?", options:["Support it for team unity","Sabotage","Complain","Ignore"], answer:0},
+  {q:"Multiple people talk at once in meeting. You?", options:["Ask for one at a time","Talk over them","Stay silent","Leave"], answer:0},
+
+  // Final set
+  {q:"Someone new joins mid-project. You?", options:["Onboard & update them","Ignore","Give minimal info","Let them struggle"], answer:0},
+  {q:"Teammate is upset after feedback. You?", options:["Check in to ensure support","Avoid them","Criticize again","Tell others"], answer:0},
+  {q:"You see a cultural misunderstanding. You?", options:["Clarify & educate respectfully","Laugh","Ignore","Criticize"], answer:0},
+  {q:"Meeting overruns constantly. You?", options:["Suggest timeboxing","Ignore","Leave","Blame chair"], answer:0},
+  {q:"Different skills in team. You?", options:["Assign tasks based on strengths","Randomly assign","Give all to best","Avoid sharing"], answer:0},
+  {q:"Teammate's work style conflicts with yours. You?", options:["Find compromise","Force your way","Complain","Ignore"], answer:0},
+  {q:"You're unclear on your role in project. You?", options:["Ask manager for clarity","Guess","Do nothing","Avoid tasks"], answer:0},
+  {q:"Colleague is consistently late to meetings. You?", options:["Address politely & suggest solutions","Publicly shame","Ignore","Complain"], answer:0},
+  {q:"Team celebrates success. You?", options:["Acknowledge everyone's role","Take credit","Ignore","Celebrate alone"], answer:0},
+  {q:"Feedback session turns personal. You?", options:["Refocus on work issues","Respond emotionally","Leave","Attack back"], answer:0}
+];
+
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+const quizForm = document.getElementById('quizForm');
+const startSection = document.getElementById('startSection');
+const quizSection = document.getElementById('quizSection');
+const timerDisplay = document.getElementById('timer');
+let timerInterval;
+let timeLeft = 40 * 60;
+
+document.getElementById('startBtn').addEventListener('click', () => {
+  startSection.style.display = 'none';
+  quizSection.style.display = 'block';
+  startQuiz();
+});
+
+function startQuiz(){
+  shuffle(questions);
+  questions.forEach((item, index) => {
+    const div = document.createElement('div');
+    div.className = 'question';
+    div.innerHTML = `<p><b>Q${index+1}:</b> ${item.q}</p>`;
+    const optionsDiv = document.createElement('div');
+    optionsDiv.className = 'options';
+    item.options.forEach((opt, i) => {
+      const label = document.createElement('label');
+      label.innerHTML = `<input type="radio" name="q${index}" value="${i}"> ${opt}`;
+      optionsDiv.appendChild(label);
+    });
+    div.appendChild(optionsDiv);
+    quizForm.appendChild(div);
+  });
+
+  timerInterval = setInterval(() => {
+    const minutes = Math.floor(timeLeft / 60);
+    const seconds = timeLeft % 60;
+    timerDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      gradeQuiz();
+    }
+    timeLeft--;
+  }, 1000);
+}
+
+function gradeQuiz() {
+  clearInterval(timerInterval);
+  let score = 0;
+  const resultDiv = document.getElementById('result');
+  resultDiv.innerHTML = '';
+  questions.forEach((item, index) => {
+    const selected = document.querySelector(`input[name="q${index}"]:checked`);
+    const userAnswer = selected ? parseInt(selected.value) : null;
+    if (userAnswer === item.answer) {
+      score++;
+    } else {
+      resultDiv.innerHTML += `<p class='wrong'><b>Q${index+1}:</b> Correct answer: ${item.options[item.answer]}</p>`;
+    }
+  });
+  resultDiv.innerHTML = `<p>Your score: ${score}/${questions.length}</p>` + resultDiv.innerHTML;
+}
+
+document.getElementById('submitBtn').addEventListener('click', (e) => {
+  e.preventDefault();
+  gradeQuiz();
+});
+</script>
+</body>
+</html>
