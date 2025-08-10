@@ -69,7 +69,7 @@ display: none;
 
 <div class="container" id="startSection">
   <h1>Collaboration Quiz</h1>
-  <p style="text-align: center;">This quiz has 50 questions. You have 20 minutes to complete it. Click below when you are ready the timer will start immediately.</p>
+  <p style="text-align: center;">This quiz has 50 questions. You have 25 minutes to complete it. Click below when you are ready the timer will start immediately.</p>
   <button id="startBtn">Start Quiz</button>
 </div>
 
@@ -83,53 +83,58 @@ display: none;
 
 <script>
 const questions = [
-  {q:"A teammate submits work with multiple errors. What's your first action?", options:["Publicly point it out","Privately discuss and help fix","Ignore it","Fix it yourself"], answer:1},
-  {q:"During a meeting, you notice a flaw in the plan. What's best?", options:["Speak up immediately with solutions","Wait until after","Send an email later","Let it go"], answer:0},
-  {q:"Two colleagues are arguing mid-project. How do you respond?", options:["Take sides","Mediate focusing on goals","Ignore","Escalate immediately"], answer:1},
-  {q:"A team member is falling behind. What’s your approach?", options:["Offer help/redistribute work","Complain","Do nothing","Replace them"], answer:0},
-  {q:"Deadline is tight, you see an error. What's best?", options:["Ignore to meet deadline","Raise with team","Fix quietly","Blame someone"], answer:1},
-  {q:"You disagree with a colleague’s approach. What's best?", options:["Tell them they're wrong","Discuss privately","Go to boss","Ignore"], answer:1},
-  {q:"A new member is quiet in meetings. How do you include them?", options:["Ask for their opinion kindly","Ignore","Talk over them","Tell them to speak more"], answer:0},
-  {q:"You get a task you don't understand. What's best?", options:["Pretend to understand","Ask clarifying questions","Do it your way","Refuse"], answer:1},
-  {q:"Two departments have conflicting priorities. You?", options:["Find compromise","Pick a side","Let them sort","Avoid"], answer:0},
-  {q:"Colleague shares credit for your work. You?", options:["Thank & acknowledge them","Stay silent","Correct publicly","Complain later"], answer:0},
-
-  // Harder situational
-  {q:"A remote teammate misses several deadlines. What's your first step?", options:["Check in privately to understand challenges","Report immediately","Ignore","Send warning email"], answer:0},
-  {q:"Your project manager makes a decision you disagree with. What's best?", options:["Respectfully share concerns privately","Challenge in front of team","Ignore","Go over their head"], answer:0},
-  {q:"A teammate dominates discussions. You?", options:["Politely invite others to speak","Let them talk","Interrupt","Speak less yourself"], answer:0},
-  {q:"Team's goal changes suddenly. How to respond?", options:["Adapt plan collaboratively","Complain","Ignore change","Work individually"], answer:0},
-  {q:"Colleague constantly interrupts you. What's best?", options:["Address politely, ask to let you finish","Interrupt back","Stay quiet","Report immediately"], answer:0},
-  {q:"Your idea is ignored but repeated by another later. You?", options:["Acknowledge your prior mention professionally","Confront them","Stay silent","Criticize them"], answer:0},
-  {q:"Team is stressed before deadline. How help?", options:["Boost morale & assist","Push them harder","Avoid team","Do only your work"], answer:0},
-  {q:"Two teammates disagree on technical approach. You?", options:["Facilitate pros/cons discussion","Pick side quickly","Let them argue","Escalate"], answer:0},
-  {q:"A client criticizes your team publicly. You?", options:["Respond professionally & discuss offline","Defend aggressively","Ignore","Blame someone"], answer:0},
-  {q:"You notice a process inefficiency. You?", options:["Propose improvement in team forum","Ignore","Change quietly","Complain privately"], answer:0},
-
-  // More advanced
-  {q:"You're leading a meeting & discussion goes off-topic. You?", options:["Redirect politely to agenda","Let it go","End meeting","Scold participants"], answer:0},
-  {q:"Conflict arises over limited resources. You?", options:["Negotiate priorities openly","Pick senior's request","Avoid","Escalate immediately"], answer:0},
-  {q:"Teammate is defensive about feedback. You?", options:["Give examples & stay constructive","Criticize more","Avoid feedback","Get angry"], answer:0},
-  {q:"You have more work than you can handle. You?", options:["Communicate early & ask to reassign","Work silently","Miss deadlines","Decline new work rudely"], answer:0},
-  {q:"A misunderstanding causes tension. You?", options:["Clarify facts calmly","Ignore","Blame","Wait"], answer:0},
-  {q:"Team is distributed across time zones. You?", options:["Set overlapping meeting times","Ignore differences","Force one schedule","Avoid calls"], answer:0},
-  {q:"A member isn't pulling their weight. You?", options:["Discuss privately, offer support","Gossip","Replace","Ignore"], answer:0},
-  {q:"Your manager forgets to include you in important emails. You?", options:["Politely remind & request inclusion","Ignore","Complain","Forward emails to self"], answer:0},
-  {q:"Team decision goes against you. You?", options:["Support it for team unity","Sabotage","Complain","Ignore"], answer:0},
-  {q:"Multiple people talk at once in meeting. You?", options:["Ask for one at a time","Talk over them","Stay silent","Leave"], answer:0},
-
-  // Final set
-  {q:"Someone new joins mid-project. You?", options:["Onboard & update them","Ignore","Give minimal info","Let them struggle"], answer:0},
-  {q:"Teammate is upset after feedback. You?", options:["Check in to ensure support","Avoid them","Criticize again","Tell others"], answer:0},
-  {q:"You see a cultural misunderstanding. You?", options:["Clarify & educate respectfully","Laugh","Ignore","Criticize"], answer:0},
-  {q:"Meeting overruns constantly. You?", options:["Suggest timeboxing","Ignore","Leave","Blame chair"], answer:0},
-  {q:"Different skills in team. You?", options:["Assign tasks based on strengths","Randomly assign","Give all to best","Avoid sharing"], answer:0},
-  {q:"Teammate's work style conflicts with yours. You?", options:["Find compromise","Force your way","Complain","Ignore"], answer:0},
-  {q:"You're unclear on your role in project. You?", options:["Ask manager for clarity","Guess","Do nothing","Avoid tasks"], answer:0},
-  {q:"Colleague is consistently late to meetings. You?", options:["Address politely & suggest solutions","Publicly shame","Ignore","Complain"], answer:0},
-  {q:"Team celebrates success. You?", options:["Acknowledge everyone's role","Take credit","Ignore","Celebrate alone"], answer:0},
-  {q:"Feedback session turns personal. You?", options:["Refocus on work issues","Respond emotionally","Leave","Attack back"], answer:0}
+  {q: "Your teammate misunderstood your email instructions. What's the best way to fix it?", options: ["Clarify in a follow-up call or message", "Blame them for not reading", "Ignore it", "Resend the same email"], answer: 0},
+  {q: "A meeting is going off-topic due to side discussions. What's your role?", options: ["Stay silent", "Politely steer conversation back to the agenda", "Leave the meeting", "Join the side discussion"], answer: 1},
+  {q: "Your team leader is absent and a decision must be made quickly. What do you do?", options: ["Wait until they return", "Facilitate a quick group decision", "Make the decision alone without telling anyone", "Escalate to a higher manager"], answer: 1},
+  {q: "You spot a potential risk in the project timeline. What's the right move?", options: ["Raise it early with the team to plan mitigation", "Wait until it becomes a problem", "Ignore it", "Document it privately"], answer: 0},
+  {q: "A colleague interrupts you repeatedly in meetings. How do you handle it?", options: ["Ask politely to finish your point", "Interrupt them back", "Stay quiet", "Complain after the meeting"], answer: 0},
+  {q: "Two team members are blaming each other for a mistake. How can you help?", options: ["Redirect focus to the problem, not the person", "Pick the side you believe", "Report both to HR", "Ignore it"], answer: 0},
+  {q: "A task requires expertise you don't have. What's the collaborative move?", options: ["Ask for help from someone skilled", "Guess and do it yourself", "Decline the task", "Delay until you learn it"], answer: 0},
+  {q: "You are asked to work with someone with a completely different style. What's best?", options: ["Find common working ground and adapt", "Insist they adapt to you", "Work separately", "Avoid them"], answer: 0},
+  {q: "Your team finished ahead of schedule. What's the most collaborative step?", options: ["Help other teams or improve the project", "Take the rest of the week off", "Boast about your efficiency", "Ignore extra opportunities"], answer: 0},
+  {q: "A team decision goes against your idea. What's your reaction?", options: ["Support the decision and help execute", "Refuse to participate", "Keep arguing", "Do your own version"], answer: 0},
+  {q: "A client gives direct feedback to you but it impacts the whole team. What now?", options: ["Share it constructively with the team", "Ignore it", "Only fix your part", "Tell only your manager"], answer: 0},
+  {q: "You notice another team is struggling with a shared project dependency. What's your move?", options: ["Offer help or adjust your schedule to unblock them", "Wait until they ask", "Ignore it", "Tell their manager"], answer: 0},
+  {q: "You're working in a global team with time zone challenges. How do you adapt?", options: ["Be flexible with meeting times and communicate asynchronously", "Refuse to attend early/late meetings", "Only work your hours", "Let them adjust"], answer: 0},
+  {q: "Two members propose equally good ideas. How do you choose?", options: ["Use objective criteria or test both", "Pick your friend's idea", "Flip a coin", "Let the louder person win"], answer: 0},
+  {q: "You join a new team mid-project. What's the first thing you should do?", options: ["Learn about the project and roles", "Suggest changes immediately", "Focus only on your tasks", "Ask who the leader is"], answer: 0},
+  {q: "A teammate's cultural background affects their communication style. What's best?", options: ["Learn about and adapt to their style", "Ignore it", "Ask them to change", "Avoid working with them"], answer: 0},
+  {q: "The team is brainstorming but only a few speak. What's your role?", options: ["Encourage quieter members to share", "Let talkative members dominate", "Stay silent", "End the meeting"], answer: 0},
+  {q: "You promised to deliver part of the work but realize you'll be late. What's right?", options: ["Inform the team early and adjust plans", "Wait until deadline", "Blame external factors later", "Ignore it"], answer: 0},
+  {q: "Your teammate takes credit for your idea in a meeting. How do you react?", options: ["Politely acknowledge your contribution and give credit to them too", "Call them out harshly", "Stay silent", "Report to manager"], answer: 0},
+  {q: "The group has decided but one person is unhappy. What's your move?", options: ["Acknowledge their concern and see if it can be addressed", "Ignore them", "Tell them to accept it", "Restart the decision process"], answer: 0},
+  {q: "A deliverable requires multiple approvals. How do you coordinate?", options: ["Track and follow up with each approver proactively", "Wait for them to respond", "Send one email and hope", "Skip approvals"], answer: 0},
+  {q: "Your team needs to adopt a new tool. What's your contribution?", options: ["Learn it and help train others", "Ignore it", "Complain about change", "Let others figure it out"], answer: 0},
+  {q: "You and another member have overlapping tasks. What's best?", options: ["Coordinate to avoid duplication", "Work separately and compare later", "Compete to finish first", "Ignore each other"], answer: 0},
+  {q: "Someone new joins your project. How do you onboard them?", options: ["Share key info and help them integrate", "Let them figure it out", "Send them documents only", "Avoid extra work"], answer: 0},
+  {q: "The team lead asks for honest feedback. What's your role?", options: ["Give constructive feedback respectfully", "Say nothing", "Only share positives", "Complain harshly"], answer: 0},
+  {q: "You're leading a meeting and notice confusion. What's best?", options: ["Pause to clarify and check understanding", "Continue anyway", "Ignore it", "Let confusion spread"], answer: 0},
+  {q: "A deadline requires weekend work. What's collaborative?", options: ["Discuss workload and availability openly", "Refuse instantly", "Assume others will do it", "Ignore the request"], answer: 0},
+  {q: "Two team members speak different native languages. How can you help?", options: ["Use clear language and translation tools", "Let them sort it", "Only talk to one", "Ignore the barrier"], answer: 0},
+  {q: "You're in a group project but one person does all the talking to the client. What should you do?", options: ["Suggest rotating client communication roles", "Let them continue", "Take over without asking", "Avoid client contact"], answer: 0},
+  {q: "A teammate submits work that has errors. What's your first action?", options: ["Publicly point it out in chat", "Privately message them to discuss fixes", "Ignore it to keep the peace", "Fix it yourself quietly"], answer: 1},
+  {q: "During a meeting, you notice the plan has a major flaw. What's best?", options: ["Wait until after the meeting to share privately", "Speak up immediately with possible solutions", "Write an email later", "Let it go"], answer: 1},
+  {q: "Two colleagues are arguing during a project. How do you respond?", options: ["Take sides with the person you agree with", "Help mediate by focusing on shared goals", "Ignore them", "Escalate immediately to management"], answer: 1},
+  {q: "A team member is struggling with their task and is falling behind. What's your approach?", options: ["Offer to help or redistribute workload", "Complain to others", "Do nothing", "Replace them"], answer: 0},
+  {q: "Your project deadline is tight, and you spot an error that will take time to fix. What's best?", options: ["Ignore the error to meet the deadline", "Raise it with the team and decide together", "Fix it quietly", "Blame whoever made it"], answer: 1},
+  {q: "You have a disagreement with a colleague's approach. What's your move?", options: ["Tell them directly they're wrong", "Discuss your concerns privately and suggest alternatives", "Go over their head to the boss", "Ignore and proceed"], answer: 1},
+  {q: "A new team member is quiet in meetings. How do you include them?", options: ["Ask for their opinion directly in a supportive way", "Ignore them", "Talk over them", "Tell them to speak more"], answer: 0},
+  {q: "You are assigned a task you don't fully understand. What's best?", options: ["Pretend you understand", "Ask clarifying questions", "Do it your own way", "Refuse the task"], answer: 1},
+  {q: "Two departments have conflicting priorities. How do you help?", options: ["Find a compromise that meets core needs of both", "Pick one side", "Let them sort it out", "Avoid the conflict"], answer: 0},
+  {q: "Your colleague shares credit for your work in a presentation. What's the right response?", options: ["Thank them and acknowledge their contributions too", "Stay silent", "Correct them publicly", "Complain later"], answer: 0},
+  // 40 harder/more realistic questions
+  {q: "A remote teammate has missed three consecutive deadlines. What’s your first step?", options: ["Escalate to management immediately", "Reach out to understand challenges and offer support", "Publicly call them out in group chat", "Take over their tasks"], answer: 1},
+  {q: "In a cross-functional meeting, two teams use conflicting technical terms. How do you proceed?", options: ["Interrupt to demand clarification", "Summarize the terms in plain language for everyone", "Let them continue", "Switch topics"], answer: 1},
+  {q: "You notice a colleague is excluded from informal team chats. What should you do?", options: ["Invite them personally and encourage inclusion", "Say nothing", "Tell them to join if they want", "Complain privately"], answer: 0},
+  {q: "The client sends feedback that contradicts your team’s approach. What’s your role?", options: ["Push back without discussion", "Organize a quick sync to align on response", "Ignore client feedback", "Follow your approach without question"], answer: 1},
+  {q: "You realize your mistake caused a delay. What's the best action?", options: ["Hide it", "Own the mistake and suggest a fix", "Blame unclear instructions", "Wait for someone to notice"], answer: 1},
+  {q: "Your team is split evenly between two strong opinions. How do you help decide?", options: ["Push for the option you like", "Suggest gathering more data or running a test", "Stay silent", "Ask the manager to choose"], answer: 1},
+  {q: "A teammate's joke makes someone uncomfortable. How do you handle it?", options: ["Laugh along", "Address it respectfully and remind about inclusivity", "Ignore it", "Report immediately without context"], answer: 1},
+  {q: "Your project requires input from a busy senior member. What's your approach?", options: ["Keep waiting", "Schedule a short focused meeting with clear agenda", "Spam them with messages", "Skip their input"], answer: 1},
+  {q: "A new policy is unpopular with your team. What's your role?", options: ["Encourage open discussion and share constructive feedback to management", "Lead a protest", "Ignore the concerns", "Refuse to follow it"], answer: 0},
+  {q: "You and a teammate get conflicting instructions from two managers. What now?", options: ["Pick one manager's instruction", "Clarify priorities with both managers together", "Do both sets of work", "Ignore one set"], answer: 1}
 ];
+
 
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -143,7 +148,7 @@ const startSection = document.getElementById('startSection');
 const quizSection = document.getElementById('quizSection');
 const timerDisplay = document.getElementById('timer');
 let timerInterval;
-let timeLeft = 40 * 60;
+let timeLeft = 25 * 60;
 
 document.getElementById('startBtn').addEventListener('click', () => {
   startSection.style.display = 'none';
